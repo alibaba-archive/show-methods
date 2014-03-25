@@ -21,15 +21,21 @@ module.exports = list;
 /**
  * list all methods in an object
  * @param {Object} obj
+ * @param {Array} exclude
  * @return {Object}
  *
  * @api public
  */
 
-function list(obj) {
+function list(obj, exclude) {
   if (!obj) {
     return {};
   }
+  exclude = exclude || [];
+  if (!Array.isArray(exclude)) {
+    exclude = [ exclude ];
+  }
+
   var methods = {
     methods: [],
     getters: [],
@@ -37,6 +43,8 @@ function list(obj) {
     accesses: [],
   };
   for (var key in obj) {
+    if (~exclude.indexOf(key)) continue;
+
     if (typeof obj[key] === 'function') {
       methods.methods.push(key);
       continue;
@@ -48,7 +56,6 @@ function list(obj) {
       methods.accesses.push(key);
       continue;
     }
-
     if (setter) methods.setters.push(key);
     if (getter) methods.getters.push(key);
   }

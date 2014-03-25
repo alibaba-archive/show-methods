@@ -39,6 +39,11 @@ describe('show methods', function () {
     });
   });
 
+  it('should exclude work ok', function () {
+    show(proto, 'foo').should.eql({methods: ['getFoo', 'setFoo']});
+    show(proto, ['getFoo', 'setFoo']).should.eql({accesses: ['foo']});
+  });
+
   it('should show events ok', function () {
     var e = new EventEmitter();
     e.on('error', function () {});
@@ -56,5 +61,5 @@ describe('show methods', function () {
       ],
       events: [ 'error', 'data' ]
     });
-  })
+  });
 });

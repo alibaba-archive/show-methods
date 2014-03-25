@@ -31,4 +31,4 @@ Class.prototype.__defineGetter__('foo_', function () {
 
 var c = new Class();
 
-console.log(show(c));
+console.log(show(c, ['removeListener', 'removeAllListeners']));

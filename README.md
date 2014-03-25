@@ -41,7 +41,7 @@ Class.prototype.__defineGetter__('foo_', function () {
 });
 
 var c = new Class();
-console.log(show(c));
+console.log(show(c, ['removeListener', 'removeAllListeners']));
 ```
 
 yield
@@ -55,8 +55,8 @@ yield
    'addListener',
    'on',
    'once',
-   'removeListener',
-   'removeAllListeners',
+   // 'removeListener',     exclude by show-methods
+   // 'removeAllListeners',
    'listeners'
   ],
   getters: [ 'foo_' ],
